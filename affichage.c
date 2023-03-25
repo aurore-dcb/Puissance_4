@@ -25,6 +25,7 @@ void aff_grille(char **grille)
     int k;
 
     i = 0;
+    printf("\n");
     aff_num_colonne();
     while (grille[i])
     {

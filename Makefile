@@ -1,5 +1,5 @@
 NAME = puissance4
-SRCS = main.c affichage.c resolution.c creation.c
+SRCS = main.c affichage.c resolution.c creation.c verifications.c
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc

@@ -28,3 +28,18 @@ char **create_grille(void)
     grille[i] = 0;
     return (grille);
 }
+
+void placer_jeton(char **grille, int col, int joueur)
+{
+    int i;
+    int jeton;
+
+    i = HAUTEUR - 1;
+    if (joueur == 1)
+        jeton = 'O';
+    else
+        jeton = 'X';
+    while (grille[i][col] != '0')
+        i--;
+    grille[i][col] = jeton;
+}
