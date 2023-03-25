@@ -18,9 +18,17 @@ int resolution(char **grille)
         joueur = j % 2 + 1;
         while (valid == 0)
         {
+            printf("\n----- Tour du joueur %d -----\n", joueur);
             printf("Numéro de colonne : ");
-            scanf ("%d", &num_c);
-            valid = valid_col(grille, num_c);
+            if (scanf ("%d", &num_c) == 0)
+                fflush(stdin);
+            else
+            {
+                if (valid_col(grille, num_c) == 0)
+                    valid = 0;
+                else
+                    valid = 1;
+            }
         }
         placer_jeton(grille, num_c, joueur);
         aff_grille(grille);

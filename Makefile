@@ -9,6 +9,7 @@ RM = rm -f
 
 ${NAME}:	${OBJS}
 			${CC} ${CFLAGS} -D HAUTEUR=6 -D LARGEUR=7 -o ${NAME} ${SRCS}
+			./${NAME}
 
 all:		${NAME}
 
