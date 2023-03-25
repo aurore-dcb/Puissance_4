@@ -21,7 +21,7 @@ int main(void)
     int gagnant;
 
     grille = create_grille();
-    if (grille == NULL)
+    if (!grille)
     {
         printf("Problème à la création de la grille.\n");
         return (0);

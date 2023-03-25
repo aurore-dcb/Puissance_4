@@ -31,7 +31,7 @@ int puissance_ligne(char **grille, char c)
                 j++;
                 while (grille[i][j] && grille[i][j++] == c)
                     compteur++;
-                if (compteur >= 4)
+                if (compteur >= NB_JETONS)
                     return (1);
             }
             else
@@ -63,7 +63,7 @@ int puissance_colonne(char **grille, char c)
                 i++;
                 while (i < HAUTEUR && grille[i++][j] == c)
                     compteur++;
-                if (compteur >= 4)
+                if (compteur >= NB_JETONS)
                     return (1);
             }
             else
@@ -99,7 +99,7 @@ int puissance_diag_droite(char **grille, char c)
                 j++;
                 while (i < HAUTEUR && j < LARGEUR && grille[i++][j++] == c)
                     compteur++;
-                if (compteur >= 4)
+                if (compteur >= NB_JETONS)
                     return (1);
                 i = tmp_i;
                 j = tmp_j + 1;
@@ -137,7 +137,7 @@ int puissance_diag_gauche(char **grille, char c)
                 j--;
                 while (i < HAUTEUR && j < LARGEUR && grille[i++][j--] == c)
                     compteur++;
-                if (compteur >= 4)
+                if (compteur >= NB_JETONS)
                     return (1);
                 i = tmp_i;
                 j = tmp_j - 1;

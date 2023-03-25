@@ -8,7 +8,7 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -D HAUTEUR=6 -D LARGEUR=7 -o ${NAME} ${SRCS}
+			${CC} ${CFLAGS} -D HAUTEUR=10 -D LARGEUR=10 -D NB_JETONS=5 -o ${NAME} ${SRCS}
 			./${NAME}
 
 all:		${NAME}

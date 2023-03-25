@@ -14,6 +14,10 @@
 # define LARGEUR 7
 #endif
 
+#ifndef NB_JETONS
+# define NB_JETONS 4
+#endif
+
 /* alloue et crée la grille de jeu */
 char **create_grille(void);
 /* Libère tout l'espace alloué de la grille principale */
