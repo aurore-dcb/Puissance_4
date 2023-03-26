@@ -36,8 +36,8 @@ void dessiner_jetons(char **grille, SDL_Renderer* renderer, int coor_grilleY, in
 /* dessine un rond sur le renderer */
 void dessine_rond(SDL_Renderer* renderer, int x, int y, int h, int w, int r, int g, int b);
 
-void animation_gagnant(SDL_Renderer* renderer, char **grille, int coor_grilleX, int coor_grilleY, int gagnant);
+void animation_gagnant(SDL_Renderer* renderer, int gagnant);
 
-void display_confetti(SDL_Window *window, SDL_Renderer *renderer);
+void display_confetti(SDL_Renderer *renderer, int num_confetti);
 
 #endif

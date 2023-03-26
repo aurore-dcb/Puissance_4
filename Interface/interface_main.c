@@ -9,7 +9,6 @@ int main(void)
     SDL_Window* window = SDL_CreateWindow("Ma fenêtre SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_LARGEUR, WIN_HAUTEUR, SDL_WINDOW_RESIZABLE);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    display_confetti(window, renderer);
     SDL_Surface* imageSurface = IMG_Load("/Images/texte_puissance4.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
     
@@ -31,7 +30,7 @@ int main(void)
     SDL_RenderPresent(renderer);
 
     gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
-    animation_gagnant(renderer, grille, coor_grilleX, coor_grilleY, gagnant);
+    animation_gagnant(renderer, gagnant);
 
     SDL_Delay(3000);
 
