@@ -1,7 +1,6 @@
 #include "../Includes/transverse_puissance4.h"
 #include "../Includes/interface_puissance4.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+
 int main(void)
 {
     SDL_Init(SDL_INIT_VIDEO);
@@ -10,7 +9,7 @@ int main(void)
     SDL_Window* window = SDL_CreateWindow("Ma fenêtre SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_LARGEUR, WIN_HAUTEUR, SDL_WINDOW_RESIZABLE);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Surface* imageSurface = IMG_Load("texte_puissance4.png");
+    SDL_Surface* imageSurface = IMG_Load("/Images/texte_puissance4.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
     
     int coor_grilleX = 50;
@@ -18,18 +17,18 @@ int main(void)
 
     char **grille;
     int gagnant;
-
+    
     grille = create_grille();
     if (!grille)
     {
         printf("Problème à la création de la grille.\n");
         return (0);
     }
+
     //afficher le plateau de jeu au debut
     aff_fond(renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
     SDL_RenderPresent(renderer);
 
-    // APPELER FONCTION RESOLUTION !!
     gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
     if (gagnant == 0)
         printf("Égalité entre les deux joueurs !\n"); //AFFICHER UNE EGALITÉ

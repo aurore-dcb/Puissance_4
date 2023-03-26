@@ -1,16 +1,6 @@
 #include "../Includes/transverse_puissance4.h"
 #include "../Includes/puissance_4.h"
 
-void free_tab(char **grille)
-{
-    int i;
-
-    i = 0;
-    while (grille[i])
-        free(grille[i++]);
-    free(grille);
-}
-
 int main(void)
 {
     printf("\n\n      ----- JEU DU PUISSANCE 4 -----\n\n");

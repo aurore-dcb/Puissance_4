@@ -41,4 +41,6 @@ int gagnant(char **grille, int joueur);
 /* renvoie 1 si la grille est completement remplie, 0 sinon */
 int is_full(char **grille);
 
+
+
 #endif

@@ -1,5 +1,15 @@
 #include "../Includes/transverse_puissance4.h"
 
+void free_tab(char **grille)
+{
+    int i;
+
+    i = 0;
+    while (grille[i])
+        free(grille[i++]);
+    free(grille);
+}
+
 char **create_grille(void)
 {
     int i;

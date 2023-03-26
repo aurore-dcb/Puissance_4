@@ -43,7 +43,6 @@ int move_curseur(SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture*
                     case SDLK_LEFT:
                         SDL_RenderClear(renderer);
                         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                        
                         SDL_RenderFillRect(renderer, &curseur_rect);
                         x -= (WIN_LARGEUR - (2*50))/LARGEUR;
                         pos--;
@@ -86,7 +85,7 @@ void aff_fond(SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture* te
     // Remplir la fenêtre avec la couleur de fond
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc
     SDL_RenderClear(renderer); //appliquer la couleur blanche sur le fond
-
+    
     // Afficher le texte "Puissance 4"
     int x = WIN_LARGEUR / 2 - (imageSurface->w) / 4;
     int y = 0;
