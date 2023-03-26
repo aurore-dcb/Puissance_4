@@ -15,7 +15,7 @@ LFLAGS = -lSDL2 -lSDL2_image -lSDL_gfx
 RM = rm -f
 
 ${NAME}:	${OBJS_I} ${OBJS_T}
-			${CC} ${CFLAGS} -D HAUTEUR=6 -D LARGEUR=7 -D NB_JETONS=4 -o ${NAME} ${SRCS_I} ${SRCS_T} ${LFLAGS}
+			${CC} ${CFLAGS} -D HAUTEUR=8 -D LARGEUR=10 -D NB_JETONS=4 -o ${NAME} ${SRCS_I} ${SRCS_T} ${LFLAGS}
 
 all:		${NAME}
 

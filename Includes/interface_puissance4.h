@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include </usr/local/Cellar/sdl_gfx/2.0.26_1/include/SDL/SDL_gfxPrimitives.h>
-// #include <SDL2/SDL_gfxPrimitives.h>
 #include "stdbool.h"
 
 #define WIN_HAUTEUR 480
