@@ -30,6 +30,11 @@ int move_curseur(SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture*
     bool redraw = false;
     int w = (WIN_LARGEUR - (2*50))/LARGEUR;
     SDL_Rect curseur_rect = { x, y, w, w };
+    
+    aff_fond(renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+    dessiner_curseur(renderer, x, y, w);
+    SDL_RenderPresent(renderer);
 
     while (running) {
         SDL_Event event;
@@ -44,17 +49,23 @@ int move_curseur(SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture*
                         SDL_RenderClear(renderer);
                         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
                         SDL_RenderFillRect(renderer, &curseur_rect);
-                        x -= (WIN_LARGEUR - (2*50))/LARGEUR;
-                        pos--;
-                        redraw = true;
+                        if (pos > 0)
+                        {
+                            x -= (WIN_LARGEUR - (2*50))/LARGEUR;
+                            pos--;
+                            redraw = true;
+                        }
                         break;
                     case SDLK_RIGHT:
                         SDL_RenderClear(renderer);
                         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
                         SDL_RenderFillRect(renderer, &curseur_rect);
-                        x += (WIN_LARGEUR - (2*50))/LARGEUR;
-                        pos++;
-                        redraw = true;
+                        if (pos < LARGEUR - 1)
+                        {
+                            x += (WIN_LARGEUR - (2*50))/LARGEUR;
+                            pos++;
+                            redraw = true;
+                        }
                         break;
                     case SDLK_RETURN:
                         SDL_RenderClear(renderer);
