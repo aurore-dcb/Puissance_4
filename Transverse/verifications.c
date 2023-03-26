@@ -4,7 +4,6 @@ int valid_col(char **grille, int col)
 {
     if (!(col >= 0 && col < LARGEUR))
         return (0);
-    // printf("grille[0][col] = %c\n", grille[0][col]);
     if (grille[0][col] != '0')
         return (0);
     return (1);

@@ -3,7 +3,11 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include </usr/local/Cellar/sdl_gfx/2.0.26_1/include/SDL/SDL_gfxPrimitives.h>
+//
 #include "stdbool.h"
 
 #define WIN_HAUTEUR 480
@@ -31,5 +35,9 @@ void dessiner_jetons(char **grille, SDL_Renderer* renderer, int coor_grilleY, in
 
 /* dessine un rond sur le renderer */
 void dessine_rond(SDL_Renderer* renderer, int x, int y, int h, int w, int r, int g, int b);
+
+void animation_gagnant(SDL_Renderer* renderer, char **grille, int coor_grilleX, int coor_grilleY, int gagnant);
+
+void display_confetti(SDL_Window *window, SDL_Renderer *renderer);
 
 #endif

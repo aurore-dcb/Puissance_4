@@ -20,12 +20,15 @@
 /* alloue et crée la grille de jeu */
 char **create_grille(void);
 
+
 /* ajoute sur la grille le nouveau jeton dans la colonne demandée */
 void placer_jeton(char **grille, int col, int joueur);
 
 /* Libère tout l'espace alloué de la grille principale */
 void free_tab(char **grille);
 
+/* regarde si la colonne où le joueur veut mettre le jeton existe et qu'elle n'est pas déjà pleine */
+int valid_col(char **grille, int col);
 /* regarde si y'a un puissance 4 sur une ligne */
 int puissance_ligne(char **grille, char c);
 /* regarde si y'a un puissance 4 sur une colonne */

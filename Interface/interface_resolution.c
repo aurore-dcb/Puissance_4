@@ -7,6 +7,7 @@ int resolution(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface,
     int joueur;
     int fin_de_jeu;
     int num_c;
+    int valid;
     
     fin_de_jeu = 0;
     num_c = 0;
@@ -14,9 +15,14 @@ int resolution(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface,
     while (fin_de_jeu == 0)
     {
         joueur = j % 2 + 1;
-        num_c = move_curseur(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, joueur);
-        if (num_c == -1)
-            return (-1);
+        valid = 0;
+        while (valid == 0)
+        {
+            num_c = move_curseur(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, joueur);
+            if (num_c == -1)
+                return (-1);
+            valid = valid_col(grille, num_c);
+        }
         placer_jeton(grille, num_c, joueur);
         if (gagnant(grille, joueur))
             return (joueur);

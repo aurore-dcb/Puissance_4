@@ -2,7 +2,7 @@ NAME = puissance4
 
 SRCS_C = Classic/classic_affichage.c Classic/classic_main.c Classic/classic_resolution.c
 SRCS_T = Transverse/creation.c Transverse/verifications.c
-SRCS_I = Interface/interface_main.c Interface/interface_resolution.c Interface/interface_grille.c
+SRCS_I = Interface/interface_main.c Interface/interface_resolution.c Interface/interface_grille.c Interface/interface_animations.c Interface/interface_confetti.c
 
 OBJS_C = ${SRCS_C:.c=.o}
 OBJS_T = ${SRCS_T:.c=.o}
@@ -14,13 +14,17 @@ LFLAGS = -lSDL2 -lSDL2_image -lSDL_gfx
 
 RM = rm -f
 
+HAUTEUR = -D HAUTEUR=6 
+LARGEUR = -D LARGEUR=7
+JETONS = -D NB_JETONS=4
+
 ${NAME}:	${OBJS_I} ${OBJS_T}
-			${CC} ${CFLAGS} -D HAUTEUR=8 -D LARGEUR=10 -D NB_JETONS=4 -o ${NAME} ${SRCS_I} ${SRCS_T} ${LFLAGS}
+			${CC} ${CFLAGS} ${HAUTEUR} ${LARGEUR} ${JETONS} -o ${NAME} ${SRCS_I} ${SRCS_T} ${LFLAGS}
 
 all:		${NAME}
 
 classic:	${OBJS_C} ${OBJS_T}
-			${CC} ${CFLAGS} -D HAUTEUR=6 -D LARGEUR=7 -D NB_JETONS=4 -o ${NAME} ${SRCS_C} ${SRCS_T}
+			${CC} ${CFLAGS} ${HAUTEUR} ${LARGEUR} ${JETONS} -o ${NAME} ${SRCS_C} ${SRCS_T}
 
 interface:	${NAME}
 

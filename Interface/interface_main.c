@@ -9,6 +9,7 @@ int main(void)
     SDL_Window* window = SDL_CreateWindow("Ma fenêtre SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_LARGEUR, WIN_HAUTEUR, SDL_WINDOW_RESIZABLE);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+    display_confetti(window, renderer);
     SDL_Surface* imageSurface = IMG_Load("/Images/texte_puissance4.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
     
@@ -30,17 +31,21 @@ int main(void)
     SDL_RenderPresent(renderer);
 
     gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
-    if (gagnant == 0)
-        printf("Égalité entre les deux joueurs !\n"); //AFFICHER UNE EGALITÉ
-    else if (gagnant == -1)
-        printf("Fin de jeu\n");
-    else
-        printf("Le joueur %d a gagné !\n", gagnant); //AFFICHER UN MESSAGE POUR LE GAGNANT
+    animation_gagnant(renderer, grille, coor_grilleX, coor_grilleY, gagnant);
 
-    //afficher le plateau de jeu a la fin
-    aff_fond(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, 0);
+    SDL_Delay(3000);
+
+    // Fenetre de fin
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc
+    SDL_RenderClear(renderer); //appliquer la couleur blanche sur le fond
+    
+    // Afficher le texte "Puissance 4"
+    int x = WIN_LARGEUR / 2 - (imageSurface->w) / 4;
+    int y = 0;
+    SDL_Rect dstrect = {x, y, (imageSurface->w) / 2, (imageSurface->h) / 2};
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
     SDL_RenderPresent(renderer);
-    //AFFICHER UN MESSAGE DE FIN DE JEU
 
     int running = 1;
     while (running) {
