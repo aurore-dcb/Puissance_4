@@ -14,6 +14,8 @@
 -> dans le terminal
 'make classic'
 
+- Paramètres :
+
 Pour changer la taille de la grille :
   Dans le Makefile changer -D HAUTEUR=n -D LARGEUR=n
 
