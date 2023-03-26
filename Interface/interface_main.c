@@ -26,7 +26,7 @@ int main(void)
     }
 
     //afficher le plateau de jeu au debut
-    aff_fond(renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
+    aff_fond(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, 0);
     SDL_RenderPresent(renderer);
 
     gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
@@ -38,7 +38,7 @@ int main(void)
         printf("Le joueur %d a gagné !\n", gagnant); //AFFICHER UN MESSAGE POUR LE GAGNANT
 
     //afficher le plateau de jeu a la fin
-    aff_fond(renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
+    aff_fond(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, 0);
     SDL_RenderPresent(renderer);
     //AFFICHER UN MESSAGE DE FIN DE JEU
 
