@@ -42,7 +42,7 @@ void display_confetti(SDL_Renderer *renderer, int num_confetti)
     // Boucle principale pour afficher les confettis
     int running = 1;
     Uint32 last_time = SDL_GetTicks();
-    while (running < 5000) {
+    while (running < 2000) {
         // Calculer le temps écoulé depuis la dernière frame
         Uint32 current_time = SDL_GetTicks();
         float elapsed_time = (current_time - last_time) / 1000.0f;
@@ -59,6 +59,9 @@ void display_confetti(SDL_Renderer *renderer, int num_confetti)
 
             confetti_pos[i].y += confetti_speed * elapsed_time;
         }
+
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc
+        SDL_RenderClear(renderer); //appliquer la couleur blanche sur le fond
         // Dessiner les confettis sur le renderer
         for (int i = 0; i < num_confetti; i++) {
             SDL_Rect dest_rect = { confetti_pos[i].x, confetti_pos[i].y, confetti_size, confetti_size };

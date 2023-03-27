@@ -1,4 +1,5 @@
 #include "../Includes/transverse_puissance4.h"
+#include "../Includes/interface_puissance4.h"
 
 int valid_col(char **grille, int col)
 {
@@ -10,7 +11,7 @@ int valid_col(char **grille, int col)
 }
 
 /* regarde si y'a un puissance 4 sur une ligne */
-int puissance_ligne(char **grille, char c)
+int puissance_ligne(char **grille, char c, struct sol *s)
 {
     int compteur;
     int i;
@@ -26,12 +27,21 @@ int puissance_ligne(char **grille, char c)
             compteur = 0;
             if (grille[i][j] == c)
             {
+                s->x_debut = j;
+                s->y_debut = i;
                 compteur++;
                 j++;
                 while (grille[i][j] && grille[i][j++] == c)
                     compteur++;
                 if (compteur >= NB_JETONS)
+                {
+                    s->x_fin = s->x_debut + (compteur);
+                    s->y_fin = i;
+                    s->type = 'L';
                     return (1);
+                }
+                s->x_debut = -1;
+                s->y_debut = -1;
             }
             else
                 j++;
@@ -42,7 +52,7 @@ int puissance_ligne(char **grille, char c)
 }
 
 /* regarde si y'a un puissance 4 sur une colonne */
-int puissance_colonne(char **grille, char c)
+int puissance_colonne(char **grille, char c, struct sol *s)
 {
     int compteur;
     int i;
@@ -58,12 +68,21 @@ int puissance_colonne(char **grille, char c)
             compteur = 0;
             if (grille[i][j] == c)
             {
+                s->x_debut = j;
+                s->y_debut = i;
                 compteur++;
                 i++;
                 while (i < HAUTEUR && grille[i++][j] == c)
                     compteur++;
                 if (compteur >= NB_JETONS)
+                {
+                    s->x_fin = j;
+                    s->y_fin = s->y_debut + compteur;
+                    s->type = 'C';
                     return (1);
+                }
+                s->x_debut = -1;
+                s->y_debut = -1;
             }
             else
                 i++;
@@ -74,7 +93,7 @@ int puissance_colonne(char **grille, char c)
 }
 
 /* regarde si y'a un puissance 4 sur une diagonale vers la droite (en partant du haut) */
-int puissance_diag_droite(char **grille, char c)
+int puissance_diag_droite(char **grille, char c, struct sol *s)
 {
     int i;
     int j;
@@ -91,6 +110,8 @@ int puissance_diag_droite(char **grille, char c)
             compteur = 0;
             if (grille[i][j] == c)
             {
+                s->x_debut = j;
+                s->y_debut = i;
                 tmp_i = i;
                 tmp_j = j;
                 compteur++;
@@ -99,7 +120,14 @@ int puissance_diag_droite(char **grille, char c)
                 while (i < HAUTEUR && j < LARGEUR && grille[i++][j++] == c)
                     compteur++;
                 if (compteur >= NB_JETONS)
+                {
+                    s->x_fin = s->x_debut + compteur;
+                    s->y_fin = s->y_debut + compteur;
+                    s->type = 'D';
                     return (1);
+                }
+                s->x_debut = -1;
+                s->y_debut = -1;
                 i = tmp_i;
                 j = tmp_j + 1;
             }
@@ -112,7 +140,7 @@ int puissance_diag_droite(char **grille, char c)
 }
 
 /* regarde si y'a un puissance 4 sur une diagonale vers la gauche (en partant du haut) */
-int puissance_diag_gauche(char **grille, char c)
+int puissance_diag_gauche(char **grille, char c, struct sol *s)
 {
     int i;
     int j;
@@ -129,6 +157,8 @@ int puissance_diag_gauche(char **grille, char c)
             compteur = 0;
             if (grille[i][j] == c)
             {
+                s->x_debut = j;
+                s->y_debut = i;
                 tmp_i = i;
                 tmp_j = j;
                 compteur++;
@@ -137,7 +167,14 @@ int puissance_diag_gauche(char **grille, char c)
                 while (i < HAUTEUR && j < LARGEUR && grille[i++][j--] == c)
                     compteur++;
                 if (compteur >= NB_JETONS)
+                {
+                    s->x_fin = s->x_debut - compteur ;
+                    s->y_fin = s->y_debut + compteur;
+                    s->type = 'G';
                     return (1);
+                }
+                s->x_debut = -1;
+                s->y_debut = -1;
                 i = tmp_i;
                 j = tmp_j - 1;
             }
@@ -150,7 +187,7 @@ int puissance_diag_gauche(char **grille, char c)
 }
 
 /* Determine grace au verificiation si il a un puissance 4 et qui est le joueur gagnant */
-int gagnant(char **grille, int joueur)
+int gagnant(char **grille, int joueur, struct sol *s)
 {
     char jeton;
 
@@ -158,13 +195,13 @@ int gagnant(char **grille, int joueur)
         jeton = 'O';
     else
         jeton = 'X';
-    if (puissance_ligne(grille, jeton))
+    if (puissance_ligne(grille, jeton, s))
         return (1);
-    if (puissance_colonne(grille, jeton))
+    if (puissance_colonne(grille, jeton, s))
         return (1);
-    if (puissance_diag_droite(grille, jeton))
+    if (puissance_diag_droite(grille, jeton, s))
         return (1);
-    if (puissance_diag_gauche(grille, jeton))
+    if (puissance_diag_gauche(grille, jeton, s))
         return (1);
     return (0);
 }

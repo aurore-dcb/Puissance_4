@@ -207,3 +207,59 @@ void aff_fond(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface, 
     }
    
 }
+
+void dessiner_ligne_epaisse(SDL_Renderer *renderer, int x1, int y1, int x2, int y2, int epaisseur) {
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int distance = (int)sqrt(dx*dx + dy*dy);
+    int x, y, i;
+    for (i = 0; i < epaisseur; i++) {
+        for (int j = 0; j < distance; j++) {
+            x = x1 + (x2 - x1) * j / distance + i - epaisseur / 2;
+            y = y1 + (y2 - y1) * j / distance + i - epaisseur / 2;
+            SDL_RenderDrawLine(renderer, x, y, x, y); // Dessine un point à la position (x, y)
+        }
+    }
+}
+
+void tracer_solution(SDL_Renderer* renderer, struct sol *s, int coor_grilleX, int coor_grilleY)
+{
+    int x1, y1, x2, y2;
+    int w = (WIN_LARGEUR - (2*50))/LARGEUR;
+    int h = (WIN_HAUTEUR - coor_grilleY - 15)/HAUTEUR;
+    int epaisseur = 5;
+
+    SDL_SetRenderDrawColor(renderer, 255, 100, 0, 255);
+    if (s->type == 'L')
+    {
+        x1 = coor_grilleX + s->x_debut * w;
+        y1 = coor_grilleY + s->y_debut * h + (h/2);
+        x2 = coor_grilleX + s->x_fin * w;
+        y2 = y1;
+        dessiner_ligne_epaisse(renderer, x1, y1, x2, y2, epaisseur);
+    }
+    else if (s->type == 'C')
+    {
+        x1 = coor_grilleX + (s->x_debut * w) + (w / 2);
+        y1 = coor_grilleY + s->y_debut * h;
+        x2 = x1;
+        y2 = coor_grilleY + s->y_fin * h;
+        dessiner_ligne_epaisse(renderer, x1, y1, x2, y2, epaisseur);
+    }
+    else if (s->type == 'D')
+    {
+        x1 = coor_grilleX + (s->x_debut * w);
+        y1 = coor_grilleY + (s->y_debut * h);
+        x2 = coor_grilleX + (s->x_fin * w);
+        y2 = coor_grilleY + (s->y_fin * h);
+        dessiner_ligne_epaisse(renderer, x1, y1, x2, y2, epaisseur);
+    }
+    else if (s->type == 'G')
+    {
+        x1 = coor_grilleX + (s->x_debut * w) + w;
+        y1 = coor_grilleY + (s->y_debut * h);
+        x2 = coor_grilleX + (s->x_fin * w) + w;
+        y2 = coor_grilleY + (s->y_fin * h);
+        dessiner_ligne_epaisse(renderer, x1, y1, x2, y2, epaisseur);
+    }
+}

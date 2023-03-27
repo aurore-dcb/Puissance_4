@@ -1,8 +1,8 @@
 NAME = puissance4
 
-SRCS_C = Classic/classic_affichage.c Classic/classic_main.c Classic/classic_resolution.c
-SRCS_T = Transverse/creation.c Transverse/verifications.c
-SRCS_I = Interface/interface_main.c Interface/interface_resolution.c Interface/interface_grille.c Interface/interface_animations.c Interface/interface_confetti.c
+SRCS_C = Classic/classic_affichage.c Classic/classic_main.c Classic/classic_resolution.c Classic/classic_verifications.c
+SRCS_T = Transverse/creation.c
+SRCS_I = Interface/interface_main.c Interface/interface_resolution.c Interface/interface_grille.c Interface/interface_animations.c Interface/interface_confetti.c Interface/interface_verifications.c
 
 OBJS_C = ${SRCS_C:.c=.o}
 OBJS_T = ${SRCS_T:.c=.o}
@@ -16,7 +16,7 @@ RM = rm -f
 
 HAUTEUR = -D HAUTEUR=6 
 LARGEUR = -D LARGEUR=7
-JETONS = -D NB_JETONS=2
+JETONS = -D NB_JETONS=3
 
 ${NAME}:	${OBJS_I} ${OBJS_T}
 			${CC} ${CFLAGS} ${HAUTEUR} ${LARGEUR} ${JETONS} -o ${NAME} ${SRCS_I} ${SRCS_T} ${LFLAGS}

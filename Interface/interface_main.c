@@ -17,22 +17,37 @@ int main(void)
 
     char **grille;
     int gagnant;
-    
+
+    struct sol *s;
+    s = (struct sol*) malloc(sizeof(struct sol));
+    if (s == NULL) {
+        printf("Erreur d'allocation de mémoire\n");
+        return (-1);
+    }
+    s->x_debut = -1;
+    s->y_debut = -1;
+    s->x_fin = -1;
+    s->y_fin = -1;
+
     grille = create_grille();
     if (!grille)
     {
         printf("Problème à la création de la grille.\n");
-        return (0);
+        return (-1);
     }
 
     //afficher le plateau de jeu au debut
     aff_fond(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, 0);
     SDL_RenderPresent(renderer);
 
-    gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY);
-    animation_gagnant(renderer, gagnant);
+    gagnant = resolution(grille, renderer, imageSurface, texture, coor_grilleX, coor_grilleY, s);
 
-    SDL_Delay(3000);
+    printf("Début : (%d,%d)\n", s->x_debut, s->y_debut);
+    printf("Fin : (%d,%d)\n", s->x_fin, s->y_fin);
+
+    animation_gagnant(grille, renderer, coor_grilleX, coor_grilleY, gagnant, s);
+
+    SDL_Delay(500);
 
     // Fenetre de fin
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc

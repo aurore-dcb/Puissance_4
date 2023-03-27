@@ -11,7 +11,7 @@ void dessiner_rectangle_blanc(SDL_Renderer* renderer, int x, int y, int largeur,
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void animation_gagnant(SDL_Renderer* renderer, int gagnant)
+void animation_gagnant(char **grille, SDL_Renderer* renderer, int coor_grilleX, int coor_grilleY, int gagnant, struct sol *s)
 {
     int running = 1;
     int show_image = 1; // afficher l'image par défaut
@@ -31,13 +31,14 @@ void animation_gagnant(SDL_Renderer* renderer, int gagnant)
     if (imgGagnant == NULL)
         return ;
 
-    // AFFICHER LES CONFETTIS
-    display_confetti(renderer, 100);
-
     // Remplir la fenêtre avec la couleur de fond
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc
     SDL_RenderClear(renderer); //appliquer la couleur blanche sur le fond
     SDL_RenderPresent(renderer);
+
+    // AFFICHER LES CONFETTIS
+    if (gagnant == 1 || gagnant == 2)
+        display_confetti(renderer, 100);
 
     while (running) {
         SDL_Event event;
@@ -59,17 +60,18 @@ void animation_gagnant(SDL_Renderer* renderer, int gagnant)
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //blanc
         SDL_RenderClear(renderer); //appliquer la couleur blanche sur le fond
 
-        // //AFFICHER JETONS
-        // dessiner_jetons(grille, renderer, coor_grilleY, coor_grilleX);
+        //AFFICHER JETONS
+        dessiner_jetons(grille, renderer, coor_grilleY, coor_grilleX);
 
-        // //GRILLE
-        // SDL_SetRenderDrawColor(renderer, 0, 0, 155, 255);
-        // dessiner_grille(renderer, coor_grilleX, coor_grilleY, LARGEUR, HAUTEUR, (WIN_LARGEUR - (2*50))/LARGEUR, (WIN_HAUTEUR - coor_grilleY - 15)/HAUTEUR);
+        // LIGNE DE SOLUTION
+        tracer_solution(renderer, s, coor_grilleX, coor_grilleY);
 
-        int x = (WIN_LARGEUR / 2) - ((imgGagnant->w) / 4);
-        int y = (WIN_HAUTEUR / 2) - ((imgGagnant->h) / 4);
-        dstrect.x = x;
-        dstrect.y = y;
+        //GRILLE
+        SDL_SetRenderDrawColor(renderer, 0, 0, 155, 255);
+        dessiner_grille(renderer, coor_grilleX, coor_grilleY, LARGEUR, HAUTEUR, (WIN_LARGEUR - (2*50))/LARGEUR, (WIN_HAUTEUR - coor_grilleY - 15)/HAUTEUR);
+
+        dstrect.x = (WIN_LARGEUR / 2) - ((imgGagnant->w) / 4);
+        dstrect.y = (WIN_HAUTEUR / 2) - ((imgGagnant->h) / 4);
         dstrect.w = (imgGagnant->w) / 2;
         dstrect.h = (imgGagnant->h) / 2;
         if (show_image) // afficher l'image si la variable show_image est vraie

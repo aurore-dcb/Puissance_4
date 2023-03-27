@@ -1,7 +1,7 @@
 #include "../Includes/transverse_puissance4.h"
 #include "../Includes/interface_puissance4.h"
 
-int resolution(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture* texture, int coor_grilleX, int coor_grilleY)
+int resolution(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface, SDL_Texture* texture, int coor_grilleX, int coor_grilleY, struct sol *s)
 {
     int j;
     int joueur;
@@ -24,7 +24,7 @@ int resolution(char **grille, SDL_Renderer* renderer, SDL_Surface* imageSurface,
             valid = valid_col(grille, num_c);
         }
         placer_jeton(grille, num_c, joueur);
-        if (gagnant(grille, joueur))
+        if (gagnant(grille, joueur, s))
             return (joueur);
         j++;
         if (is_full(grille))
